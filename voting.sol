@@ -36,7 +36,7 @@ contract Voting is Ownable{
     WorkflowStatus _workflowStatus = WorkflowStatus.RegisteringVoters;
 
     Proposal[] _proposals;
-    uint _winningProposalId;
+    uint[] _winningProposalId;
 
     modifier onlyVoters() {
         require (_voters[msg.sender].isRegistered, "Sorry you are not allowed to send a proposal and vote");
@@ -74,15 +74,21 @@ contract Voting is Ownable{
     function closeVoting() public onlyOwner {
         require(_workflowStatus == WorkflowStatus.VotingSessionEnded, "Current status is not voting session ended");
         _workflowStatus = WorkflowStatus.VotesTallied;
-        uint  highestCount = 0;
+        uint highestCount = 0;
         for (uint i = 0; i < _proposals.length; i++) {
+            if (_proposals[i].voteCount == highestCount) {
+                _winningProposalId.push(i);
+            }
             if (_proposals[i].voteCount > highestCount) {
-                _winningProposalId = i;
-            } 
+                _winningProposalId = [i];
+                highestCount = _proposals[i].voteCount;
+            }
+            
         }
         
         emit WorkflowStatusChange(WorkflowStatus.VotingSessionEnded, WorkflowStatus.VotesTallied);
     }
+    
 
     function addVoter(address _address) public onlyOwner {
         require(_workflowStatus == WorkflowStatus.RegisteringVoters, "It's not allowed to add voters");
@@ -121,9 +127,14 @@ contract Voting is Ownable{
         emit Voted(msg.sender, _proposalId);
     }
     
-    function winningProposal() view public returns (Proposal memory winner) {
+    function winningProposal() view public returns (Proposal[] memory winner) {
         require(_workflowStatus == WorkflowStatus.VotesTallied, "Vote not ended");
-        return _proposals[_winningProposalId];
+        uint size = _winningProposalId.length;
+        Proposal[] memory winProposals = new Proposal[](size);
+        for (uint i = 0; i < _winningProposalId.length; i++) {
+            winProposals[i] = _proposals[_winningProposalId[i]];
+        }
+        return winProposals;
     }
     
     function viewProposals() view public returns(Proposal[] memory proposals) {
