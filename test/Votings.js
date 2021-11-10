@@ -82,7 +82,7 @@ contract("Voting", accounts => {
         })
 
         // confirm that a voting can't be close if status is not VotingSessionEnded
-        it("should revert because close Voting is not possible when workflow status is not 5 (VotingSessionEnded)", async function () {
+        it("should revert because close Voting is not possible when workflow status is not 4 (VotingSessionEnded)", async function () {
             await expectRevert(votingsInstance.closeVoting({ from: _owner }), "Current status is not voting session ended");
         })
 
