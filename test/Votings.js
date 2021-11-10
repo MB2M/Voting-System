@@ -1,6 +1,5 @@
 const votings = artifacts.require("Voting");
 const { BN, expectRevert, expectEvent } = require('@openzeppelin/test-helpers');
-const { assertion } = require('@openzeppelin/test-helpers/src/expectRevert');
 const { expect } = require('chai');
 
 contract("Voting", accounts => {
@@ -83,7 +82,7 @@ contract("Voting", accounts => {
         })
 
         // confirm that a voting can't be close if status is not VotingSessionEnded
-        it("should revert because close Voting is not possible when workflow status is not 4 (VotingSessionEnded)", async function () {
+        it("should revert because close Voting is not possible when workflow status is not 5 (VotingSessionEnded)", async function () {
             await expectRevert(votingsInstance.closeVoting({ from: _owner }), "Current status is not voting session ended");
         })
 
