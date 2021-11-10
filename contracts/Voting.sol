@@ -27,7 +27,7 @@ contract Voting is Ownable {
         VotesTallied
     }
 
-    WorkflowStatus _workflowStatus = WorkflowStatus.RegisteringVoters;
+    WorkflowStatus _workflowStatus;
 
     Proposal[] _proposals;
     uint256[] _winningProposalId;

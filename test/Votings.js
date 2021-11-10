@@ -10,7 +10,7 @@ contract("Voting", accounts => {
     const _voter2 = accounts[2];
     let votingsInstance;
 
-    
+
     context('when not Owner', async function () {
         before(async () => {
             votingsInstance = await votings.new({ from: _owner });
@@ -131,18 +131,18 @@ contract("Voting", accounts => {
                 winningProposalsDescr.push(winningProposal.description);
             }
 
-            expect(winningProposalsDescr, "there should be 'vote for me' and 'vote for me too' as winning proposals").to.have.members(['vote for me' , 'vote for me too']);
+            expect(winningProposalsDescr, "there should be 'vote for me' and 'vote for me too' as winning proposals").to.have.members(['vote for me', 'vote for me too']);
 
         })
     })
 
     context('when Voter', async function () {
         before(async () => {
-            votingsInstance = await votings.new({from: _owner});
+            votingsInstance = await votings.new({ from: _owner });
         })
 
         //test that a proposal is correctly added
-        it("should add proposal 'vote for me' and emit event" , async function() {
+        it("should add proposal 'vote for me' and emit event", async function () {
             await votingsInstance.addVoter(_voter1, { from: _owner });
             await votingsInstance.addVoter(_voter2, { from: _owner });
             await votingsInstance.startProposalRegistration({ from: _owner });
@@ -154,11 +154,11 @@ contract("Voting", accounts => {
             }
 
             expect(proposalsDescr, "'vote for me' should have been added as proposal").to.have.members(['vote for me']);
-            expectEvent(r, "ProposalRegistered", { proposalId: new BN(0)});
+            expectEvent(r, "ProposalRegistered", { proposalId: new BN(0) });
         })
 
         //test that an other proposal is correctly added
-        it("should add proposal 'vote for me too' and emit event" , async function() {
+        it("should add proposal 'vote for me too' and emit event", async function () {
             const r = await votingsInstance.addProposal('vote for me too', { from: _voter1 });
             let proposals = await votingsInstance.viewProposals();
             let proposalsDescr = [];
@@ -167,63 +167,63 @@ contract("Voting", accounts => {
             }
 
             expect(proposalsDescr, "'vote for me' and 'vote for me too' should have been added as proposal").to.have.members(['vote for me', 'vote for me too']);
-            expectEvent(r, "ProposalRegistered", { proposalId: new BN(1)});
+            expectEvent(r, "ProposalRegistered", { proposalId: new BN(1) });
         })
 
         // test a vote by a voter
-        it("should add a vote by _voter1 to proposal 'vote for me' and emit event" , async function() {
+        it("should add a vote by _voter1 to proposal 'vote for me' and emit event", async function () {
             await votingsInstance.endProposalRegistration({ from: _owner });
             await votingsInstance.startVotingSession({ from: _owner });
 
             // voter can't vote for proposal that doesn't exist
-            await expectRevert.unspecified(votingsInstance.vote(2, {from: _voter1}));
+            await expectRevert.unspecified(votingsInstance.vote(2, { from: _voter1 }));
 
-            const r = await votingsInstance.vote(0, {from: _voter1});
+            const r = await votingsInstance.vote(0, { from: _voter1 });
 
             let proposals = await votingsInstance.viewProposals();
 
             expect(proposals[0].voteCount, "number of proposal should be equal to 1").to.be.bignumber.equal(new BN(1));
-            
+
             expect((await votingsInstance._voters.call(_voter1)).hasVoted, 'voter1.hasVoted should be true').to.be.true;
 
             expect((await votingsInstance._voters.call(_voter1)).votedProposalId, 'voter1.votedProposalId should have vote for proposal index 0').to.be.bignumber.equal(new BN(0));
 
-            expectEvent(r, "Voted", {voter: _voter1, proposalId: new BN(0)});
+            expectEvent(r, "Voted", { voter: _voter1, proposalId: new BN(0) });
         })
 
         // confirm that a voter can't vote more than one time.
-        it("should revert because _voter1 can't vote more than 1 time" , async function() {
-            await expectRevert(votingsInstance.vote(0, {from: _voter1}), "You already voted");
+        it("should revert because _voter1 can't vote more than 1 time", async function () {
+            await expectRevert(votingsInstance.vote(0, { from: _voter1 }), "You already voted");
         })
 
         // test a vote by a second voter
-        it("should add a vote by _voter2 to proposal 'vote for me' and emit event" , async function() {
+        it("should add a vote by _voter2 to proposal 'vote for me' and emit event", async function () {
 
-            const r = await votingsInstance.vote(0, {from: _voter2});
+            const r = await votingsInstance.vote(0, { from: _voter2 });
 
             let proposals = await votingsInstance.viewProposals();
 
             expect(proposals[0].voteCount).to.be.bignumber.equal(new BN(2), 'voteCount should be 2');
-            
+
             expect((await votingsInstance._voters.call(_voter2)).hasVoted, 'voter1.hasVoted should be true').to.be.true;
 
             expect((await votingsInstance._voters.call(_voter2)).votedProposalId, 'voter1.votedProposalId should have vote for proposal index 0').to.be.bignumber.equal(new BN(0));
 
-            expectEvent(r, "Voted", {voter: _voter2, proposalId: new BN(0)});
+            expectEvent(r, "Voted", { voter: _voter2, proposalId: new BN(0) });
         })
 
     })
 
     context('when not Voter', async function () {
         before(async () => {
-            votingsInstance = await votings.new({from: _owner});
+            votingsInstance = await votings.new({ from: _owner });
         })
 
         // confirm that a non registered voter can't add propospal and vote.
         it('should revert', async function () {
             await expectRevert(votingsInstance.addProposal('vote for me', { from: _voter1 }), "Sorry you are not allowed to send a proposal and vote");
-            await expectRevert(votingsInstance.vote(0,{ from: _voter1 }), "Sorry you are not allowed to send a proposal and vote");
+            await expectRevert(votingsInstance.vote(0, { from: _voter1 }), "Sorry you are not allowed to send a proposal and vote");
 
-        })       
+        })
     })
 })
