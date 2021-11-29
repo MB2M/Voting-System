@@ -1,0 +1,28 @@
+body {
+  background-image: url("/Dark-Website.jpg");
+}
+
+.App {
+  color: rgb(247, 240, 240);
+  text-align: center;
+}
+
+.admin {
+  padding-bottom: 2rem;
+  padding-top: 0.1rem;
+  margin-left: auto;
+  margin-right:auto;
+  border: solid 3px blue;
+}
+
+.admin__button {
+  width: 10rem;
+  height: 4rem;
+  background-color: rgb(35, 146, 243);
+  padding: 1rem 1rem 1rem 1rem;
+  margin: 10px;
+}
+
+.vote-info {
+  display: flex;
+}

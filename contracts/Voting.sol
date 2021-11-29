@@ -1,6 +1,6 @@
 // SPDX-License-Identifier: GPL-3.0
 
-pragma solidity ^0.8.7;
+pragma solidity 0.8.9;
 
 import "@openzeppelin/contracts/access/Ownable.sol";
 
@@ -25,7 +25,6 @@ contract Voting is Ownable {
 
     /** 
         @notice View the status of a potential voter
-        @return Return a Voter structure
      */ 
 
     mapping(address => Voter) public voters;
@@ -39,7 +38,7 @@ contract Voting is Ownable {
         VotesTallied
     }
 
-    WorkflowStatus workflowStatus;
+    WorkflowStatus public workflowStatus;
 
     Proposal[] _proposals;
     uint256[] _winningProposalId;
