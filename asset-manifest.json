@@ -1,25 +1,24 @@
 {
   "files": {
-    "main.css": "/Voting-System/static/css/main.0589f251.chunk.css",
-    "main.js": "/Voting-System/static/js/main.25a4a20b.chunk.js",
-    "main.js.map": "/Voting-System/static/js/main.25a4a20b.chunk.js.map",
-    "runtime-main.js": "/Voting-System/static/js/runtime-main.5655bdc1.js",
-    "runtime-main.js.map": "/Voting-System/static/js/runtime-main.5655bdc1.js.map",
-    "static/css/2.7020638d.chunk.css": "/Voting-System/static/css/2.7020638d.chunk.css",
-    "static/js/2.ad92664a.chunk.js": "/Voting-System/static/js/2.ad92664a.chunk.js",
-    "static/js/2.ad92664a.chunk.js.map": "/Voting-System/static/js/2.ad92664a.chunk.js.map",
+    "main.css": "/Voting-System/static/css/main.16160fe2.chunk.css",
+    "main.js": "/Voting-System/static/js/main.2cd166fc.chunk.js",
+    "main.js.map": "/Voting-System/static/js/main.2cd166fc.chunk.js.map",
+    "runtime-main.js": "/Voting-System/static/js/runtime-main.4fb79041.js",
+    "runtime-main.js.map": "/Voting-System/static/js/runtime-main.4fb79041.js.map",
+    "static/css/2.271cb14c.chunk.css": "/Voting-System/static/css/2.271cb14c.chunk.css",
+    "static/js/2.28545b25.chunk.js": "/Voting-System/static/js/2.28545b25.chunk.js",
+    "static/js/2.28545b25.chunk.js.map": "/Voting-System/static/js/2.28545b25.chunk.js.map",
     "index.html": "/Voting-System/index.html",
-    "precache-manifest.620e79fbcb4cc8a1890dbc618d4d53d7.js": "/Voting-System/precache-manifest.620e79fbcb4cc8a1890dbc618d4d53d7.js",
-    "service-worker.js": "/Voting-System/service-worker.js",
-    "static/css/2.7020638d.chunk.css.map": "/Voting-System/static/css/2.7020638d.chunk.css.map",
-    "static/css/main.0589f251.chunk.css.map": "/Voting-System/static/css/main.0589f251.chunk.css.map",
-    "static/media/App.css": "/Voting-System/static/media/Dark-Website.e80347f8.jpg"
+    "static/css/2.271cb14c.chunk.css.map": "/Voting-System/static/css/2.271cb14c.chunk.css.map",
+    "static/css/main.16160fe2.chunk.css.map": "/Voting-System/static/css/main.16160fe2.chunk.css.map",
+    "static/js/2.28545b25.chunk.js.LICENSE.txt": "/Voting-System/static/js/2.28545b25.chunk.js.LICENSE.txt",
+    "static/media/App.css": "/Voting-System/static/media/Dark-Website.1a1c77f2.jpg"
   },
   "entrypoints": [
-    "static/js/runtime-main.5655bdc1.js",
-    "static/css/2.7020638d.chunk.css",
-    "static/js/2.ad92664a.chunk.js",
-    "static/css/main.0589f251.chunk.css",
-    "static/js/main.25a4a20b.chunk.js"
+    "static/js/runtime-main.4fb79041.js",
+    "static/css/2.271cb14c.chunk.css",
+    "static/js/2.28545b25.chunk.js",
+    "static/css/main.16160fe2.chunk.css",
+    "static/js/main.2cd166fc.chunk.js"
   ]
 }
